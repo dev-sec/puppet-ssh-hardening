@@ -1,29 +1,79 @@
-# == Class: ssh
+# == Class: ssh_hardening
 #
-# The default SSH class which installs both SSH client and server configurations.
+# The default SSH class which installs the SSH server and client
 #
 # === Parameters
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*cbc_required*]
+#   CBC-meachnisms are considered weaker and will not be used as ciphers by
+#   default. Set this option to true if you really need CBC-based ciphers.
 #
-# === Variables
+# [*weak_hmac*]
+#   The HMAC-mechanisms are selected to be cryptographically strong. If you
+#   require some weaker variants, set this option to true to get safe selection.
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# [*weak_kex*]
+#   The KEX-mechanisms are selected to be cryptographically strong. If you
+#   require some weaker variants, set this option to true to get safe selection.
 #
-# === Examples
+# [*ports*]
+#   A list of ports that SSH expects to run on. Defaults to 22.
 #
-#  class { ssh }
+# [*listen_to*]
+#   A list of addresses which SSH listens on. Best to specify only on address of
+#   one interface.
+#
+# [*host_key_files*]
+#   A list of host key files to use.
+#
+# [*client_alive_interval*]
+#   Interval after which the server checks if the client is alive (in seconds).
+#
+# [*client_alive_count*]
+#   The maximum number of failed client alive checks before the client is
+#   forcefully disconnected.
+#
+# [*allow_root_with_key*]
+#   Whether to allow login of root. If true, root may log in using the key files
+#   specified in authroized_keys. Otherwise any login attempts as user root
+#   are forbidden.
+#
+# [*ipv6_enabled*]
+#   Set to true if you need IPv6 support in SSH.
 #
 # === Copyright
 #
 # Copyright 2014, Deutsche Telekom AG
 #
-class ssh_hardening {
+class ssh_hardening(
+  $cbc_required = false,
+  $weak_hmac = false,
+  $weak_kex = false,
+  $ports = [ 22 ],
+  $listen_to = [ "0.0.0.0" ],
+  $host_key_files = ["/etc/ssh/ssh_host_rsa_key","/etc/ssh/ssh_host_dsa_key","/etc/ssh/ssh_host_ecdsa_key"],
+  $client_alive_interval = 600,
+  $client_alive_count = 3,
+  $allow_root_with_key = false,
+  $ipv6_enabled = false
+) {
+  class { 'ssh_hardening::server':
+    cbc_required => $cbc_required,
+    weak_hmac => $weak_hmac,
+    weak_kex => $weak_kex,
+    ports => $ports,
+    listen_to => $listen_to,
+    host_key_files => $host_key_files,
+    client_alive_interval => $client_alive_interval,
+    client_alive_count => $client_alive_count,
+    allow_root_with_key => $allow_root_with_key,
+    ipv6_enabled => $ipv6_enabled,
+  }
+  class { 'ssh_hardening::client':
+    ipv6_enabled => $ipv6_enabled,
+    ports => $ports,
+    cbc_required => $cbc_required,
+    weak_hmac => $weak_hmac,
+    weak_kex => $weak_kex,
+  }
 }
