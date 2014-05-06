@@ -7,4 +7,4 @@ summary 'Installs and configures OpenSSH with hardening'
 description 'Installs and configures OpenSSH with hardening'
 project_page 'https://github.com/TelekomLabs/puppet-ssh-hardening'
 
-dependency 'saz/puppet-ssh', '2.3.6'
+dependency 'saz/ssh', '2.3.6'

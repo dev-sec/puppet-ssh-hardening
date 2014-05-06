@@ -7,7 +7,7 @@ This module provides secure ssh-client and ssh-server configurations.
 ## Requirements
 
 * Puppet
-* Puppet modules: `saz/puppet-ssh`
+* Puppet modules: `saz/ssh`
 
 
 ## Parameters
