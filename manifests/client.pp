@@ -46,15 +46,15 @@ class ssh_hardening::client (
   }
 
   if $weak_hmac == true {
-    $mac = "hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1"
+    $mac = "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1"
   } else {
-    $mac = "hmac-sha2-256,hmac-sha2-512,hmac-ripemd160"
+    $mac = "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160"
   }
 
   if $weak_kex == true {
-    $kex = "ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1"
+    $kex = "diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1"
   } else {
-    $kex = "ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256"
+    $kex = "diffie-hellman-group-exchange-sha256"
   }
 
   class { 'ssh::client':
