@@ -1,4 +1,4 @@
-name    'ssh_hardening'
+name    'hardening/ssh_hardening'
 version '0.1.0'
 source 'https://github.com/TelekomLabs/puppet-ssh-hardening'
 author 'Dominik Richter'
