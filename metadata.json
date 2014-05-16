@@ -1,0 +1,26 @@
+{
+  "name": "hardening/ssh_hardening",
+  "version": "0.1.0",
+  "source": "https://github.com/TelekomLabs/puppet-ssh-hardening",
+  "author": "Dominik Richter",
+  "license": "Apache License, Version 2.0",
+  "summary": "Installs and configures OpenSSH with hardening",
+  "description": "Installs and configures OpenSSH with hardening",
+  "project_page": "https://github.com/TelekomLabs/puppet-ssh-hardening",
+  "dependencies": [
+    {
+      "name": "saz/ssh",
+      "version_requirement": "2.3.6"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "Modulefile": "b0ded582c0ec70850e976fdfd7b55313",
+    "README.md": "4c4f9d79084afe722990acb22f76d77e",
+    "manifests/client.pp": "34db4b9557916d05e740bd9ad56e9e0c",
+    "manifests/init.pp": "ef4f21366553fd4973ccb3fe5ec4c0b3",
+    "manifests/server.pp": "662f499fb75626bf1a7facbf5e9fc788"
+  }
+}
