@@ -75,9 +75,9 @@ class ssh_hardening::server (
   }
 
   if $weak_hmac == true {
-    $mac = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1'
+    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1'
   } else {
-    $mac = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
+    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
   }
 
   if $weak_kex == true {
