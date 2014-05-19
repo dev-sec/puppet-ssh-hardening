@@ -1,0 +1,8 @@
+exp.*
+.kitchen
+.kitchen.local.yml
+shared_test_repo/
+.librarian/
+.tmp/
+test/integration
+
