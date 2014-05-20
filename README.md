@@ -12,13 +12,13 @@ This module provides secure ssh-client and ssh-server configurations.
 
 ## Parameters
 
-* `ipv5_enabled` - true if IPv6 is needed
-* `cbc_required` - true if CBC for ciphers is required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure ciphers enabled. CBC is a weak alternative. Anything weaker should be avoided and is thus not available.
-* `weak_hmac` - true if weaker HMAC mechanisms are required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure HMACs enabled.
-* `weak_kex` - true if weaker Key-Exchange (KEX) mechanisms are required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure KEXs enabled.
-* `allow_root_with_key` - `false` to disable root login altogether. Set to `true` to allow root to login via key-based mechanism.
-* `ports` - ports to which ssh-server should listen to and ssh-client should connect to
-* `listen_to` - one or more ip addresses, to which ssh-server should listen to. Default is empty, but should be configured for security reasons!
+* `ipv6_enabled = false` - true if IPv6 is needed
+* `cbc_required = false` - true if CBC for ciphers is required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure ciphers enabled. CBC is a weak alternative. Anything weaker should be avoided and is thus not available.
+* `weak_hmac = false` - true if weaker HMAC mechanisms are required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure HMACs enabled.
+* `weak_kex = false` - true if weaker Key-Exchange (KEX) mechanisms are required. This is usually only necessary, if older M2M mechanism need to communicate with SSH, that don't have any of the configured secure KEXs enabled.
+* `allow_root_with_key = false` - `false` to disable root login altogether. Set to `true` to allow root to login via key-based mechanism.
+* `ports = [ 22 ]` - ports to which ssh-server should listen to and ssh-client should connect to
+* `listen_to = [ "0.0.0.0" ]` - one or more ip addresses, to which ssh-server should listen to. Default is empty, but should be configured for security reasons!
 * `remote_hosts` - one or more hosts, to which ssh-client can connect to. Default is empty, but should be configured for security reasons!
 
 ## Usage
