@@ -46,34 +46,38 @@
 # Copyright 2014, Deutsche Telekom AG
 #
 class ssh_hardening(
-  $cbc_required = false,
-  $weak_hmac = false,
-  $weak_kex = false,
-  $ports = [ 22 ],
-  $listen_to = [ "0.0.0.0" ],
-  $host_key_files = ["/etc/ssh/ssh_host_rsa_key","/etc/ssh/ssh_host_dsa_key","/etc/ssh/ssh_host_ecdsa_key"],
+  $cbc_required          = false,
+  $weak_hmac             = false,
+  $weak_kex              = false,
+  $ports                 = [ 22 ],
+  $listen_to             = [ '0.0.0.0' ],
+  $host_key_files        = [
+    '/etc/ssh/ssh_host_rsa_key',
+    '/etc/ssh/ssh_host_dsa_key',
+    '/etc/ssh/ssh_host_ecdsa_key'
+    ],
   $client_alive_interval = 600,
-  $client_alive_count = 3,
-  $allow_root_with_key = false,
-  $ipv6_enabled = false
+  $client_alive_count    = 3,
+  $allow_root_with_key   = false,
+  $ipv6_enabled          = false
 ) {
   class { 'ssh_hardening::server':
-    cbc_required => $cbc_required,
-    weak_hmac => $weak_hmac,
-    weak_kex => $weak_kex,
-    ports => $ports,
-    listen_to => $listen_to,
-    host_key_files => $host_key_files,
+    cbc_required          => $cbc_required,
+    weak_hmac             => $weak_hmac,
+    weak_kex              => $weak_kex,
+    ports                 => $ports,
+    listen_to             => $listen_to,
+    host_key_files        => $host_key_files,
     client_alive_interval => $client_alive_interval,
-    client_alive_count => $client_alive_count,
-    allow_root_with_key => $allow_root_with_key,
-    ipv6_enabled => $ipv6_enabled,
+    client_alive_count    => $client_alive_count,
+    allow_root_with_key   => $allow_root_with_key,
+    ipv6_enabled          => $ipv6_enabled,
   }
   class { 'ssh_hardening::client':
     ipv6_enabled => $ipv6_enabled,
-    ports => $ports,
+    ports        => $ports,
     cbc_required => $cbc_required,
-    weak_hmac => $weak_hmac,
-    weak_kex => $weak_kex,
+    weak_hmac    => $weak_hmac,
+    weak_kex     => $weak_kex,
   }
 }

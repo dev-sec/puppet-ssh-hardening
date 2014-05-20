@@ -46,146 +46,168 @@
 # Copyright 2014, Deutsche Telekom AG
 #
 class ssh_hardening::server (
-  $cbc_required = false,
-  $weak_hmac = false,
-  $weak_kex = false,
-  $ports = [ 22 ],
-  $listen_to = [ "0.0.0.0" ],
-  $host_key_files = ["/etc/ssh/ssh_host_rsa_key","/etc/ssh/ssh_host_dsa_key","/etc/ssh/ssh_host_ecdsa_key"],
+  $cbc_required          = false,
+  $weak_hmac             = false,
+  $weak_kex              = false,
+  $ports                 = [ 22 ],
+  $listen_to             = [ '0.0.0.0' ],
+  $host_key_files        = [
+    '/etc/ssh/ssh_host_rsa_key',
+    '/etc/ssh/ssh_host_dsa_key',
+    '/etc/ssh/ssh_host_ecdsa_key'
+    ],
   $client_alive_interval = 600,
-  $client_alive_count = 3,
-  $allow_root_with_key = false,
-  $ipv6_enabled = false
+  $client_alive_count    = 3,
+  $allow_root_with_key   = false,
+  $ipv6_enabled          = false
 ) {
   if $ipv6_enabled == true {
-    $addressfamily = "any"
+    $addressfamily = 'any'
   } else {
-    $addressfamily = "inet"
+    $addressfamily = 'inet'
   }
-  
+
   if $cbc_required == true {
-    $ciphers = "aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc"
+    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,'+
+      'aes128-cbc,aes256-cbc,aes192-cbc'
   } else {
-    $ciphers = "aes128-ctr,aes256-ctr,aes192-ctr"
+    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr'
   }
 
   if $weak_hmac == true {
-    $mac = "hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1"
+    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1'
   } else {
-    $mac = "hmac-sha2-256,hmac-sha2-512,hmac-ripemd160"
+    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
   }
 
   if $weak_kex == true {
-    $kex = "ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1"
+    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,'+
+      'ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,'+
+      'diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,'+
+      'diffie-hellman-group1-sha1'
   } else {
-    $kex = "ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256"
+    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,'+
+      'diffie-hellman-group-exchange-sha256'
   }
 
   if $allow_root_with_key == true {
-    $permit_root_login = "without-password"
+    $permit_root_login = 'without-password'
   } else {
-    $permit_root_login = "no"
+    $permit_root_login = 'no'
   }
 
   class { 'ssh::server':
     storeconfigs_enabled => false,
-    options => {
+    options              => {
       # Basic configuration
       # ===================
 
       # Either disable or only allow root login via certificates.
-      'PermitRootLogin' => $permit_root_login,
+      'PermitRootLogin'                 => $permit_root_login,
 
       # Define which port sshd should listen to. Default to `22`.
-      'Port' => $ports,
+      'Port'                            => $ports,
 
-      # Address family should always be limited to the active network configuration.
-      'AddressFamily' => $addressfamily,
+      # Address family should always be limited to the active
+      # network configuration.
+      'AddressFamily'                   => $addressfamily,
 
-      # Define which addresses sshd should listen to. Default to `0.0.0.0`, ie make sure you put your desired address in here, since otherwise sshd will listen to everyone.
-      'ListenAddress'=> $listen_to,
+      # Define which addresses sshd should listen to.
+      # Default to `0.0.0.0`, ie make sure you put your desired address
+      # in here, since otherwise sshd will listen to everyone.
+      'ListenAddress'                   => $listen_to,
 
       # Security configuration
       # ======================
-      
-      # Set the protocol family to 2 for security reasons. Disables legacy support.
-      'Protocol' => 2,
 
-      # Make sure sshd checks file modes and ownership before accepting logins. This prevents accidental misconfiguration.
-      'StrictModes' => 'yes',
+      # Set the protocol family to 2 for security reasons.
+      # Disables legacy support.
+      'Protocol'                        => 2,
 
-      # Logging, obsoletes QuietMode and FascistLogging 
-      'SyslogFacility' => 'AUTH',
-      'LogLevel' => 'VERBOSE',
+      # Make sure sshd checks file modes and ownership before accepting logins.
+      # This prevents accidental misconfiguration.
+      'StrictModes'                     => 'yes',
+
+      # Logging, obsoletes QuietMode and FascistLogging
+      'SyslogFacility'                  => 'AUTH',
+      'LogLevel'                        => 'VERBOSE',
 
       # Cryptography
       # ------------
 
-      # **Ciphers** -- If your clients don't support CTR (eg older versions), cbc will be added
+      # **Ciphers** -- If your clients don't support CTR (eg older versions),
+      #   cbc will be added
       # CBC: is true if you want to connect with OpenSSL-base libraries
-      # eg ruby Net::SSH::Transport::CipherFactory requires cbc-versions of the given openssh ciphers to work
-      # -- see: (http://net-ssh.github.com/net-ssh/classes/Net/SSH/Transport/CipherFactory.html)
-      # 
-      'Ciphers' => $ciphers,
+      # eg Ruby's older Net::SSH::Transport::CipherFactory requires CBC-versions
+      # of the given openssh ciphers to work
+      #
+      'Ciphers'                         => $ciphers,
 
-      # **Hash algorithms** -- Make sure not to use SHA1 for hashing, unless it is really necessary.
-      # Weak HMAC is sometimes required if older package versions are used 
-      # eg Ruby's Net::SSH at around 2.2.* doesn't support sha2 for hmac, so this will have to be set true in this case.
-      # 
-      'MACs' => $macs,
+      # **Hash algorithms** -- Make sure not to use SHA1 for hashing,
+      # unless it is really necessary.
+      # Weak HMAC is sometimes required if older package versions are used
+      # eg Ruby's Net::SSH at around 2.2.* doesn't support sha2 for hmac,
+      # so this will have to be set true in this case.
+      #
+      'MACs'                            => $macs,
 
       # Alternative setting, if OpenSSH version is below v5.9
       #MACs hmac-ripemd160
 
-      # **Key Exchange Algorithms** -- Make sure not to use SHA1 for kex, unless it is really necessary
+      # **Key Exchange Algorithms** -- Make sure not to use SHA1 for kex,
+      # unless it is really necessary
       # Weak kex is sometimes required if older package versions are used
-      # eg ruby's Net::SSH at around 2.2.* doesn't support sha2 for kex, so this will have to be set true in this case.
-      # 
-      'KexAlgorithms' => $kex,
+      # eg ruby's Net::SSH at around 2.2.* doesn't support sha2 for kex,
+      # so this will have to be set true in this case.
+      #
+      'KexAlgorithms'                   => $kex,
 
       # Lifetime and size of ephemeral version 1 server key
-      'KeyRegenerationInterval' => '1h',
-      'ServerKeyBits' => 2048,
-      
+      'KeyRegenerationInterval'         => '1h',
+      'ServerKeyBits'                   => 2048,
+
       # Authentication
       # --------------
 
       # Secure Login directives.
-      'UseLogin' => 'no',
-      'UsePrivilegeSeparation' => 'yes',
-      'PermitUserEnvironment' => 'no',
-      'LoginGraceTime' => '30s',
-      'MaxAuthTries' => 2,
-      'MaxSessions' => 10,
-      'MaxStartups' => "10:30:100",
+      'UseLogin'                        => 'no',
+      'UsePrivilegeSeparation'          => 'yes',
+      'PermitUserEnvironment'           => 'no',
+      'LoginGraceTime'                  => '30s',
+      'MaxAuthTries'                    => 2,
+      'MaxSessions'                     => 10,
+      'MaxStartups'                     => '10:30:100',
 
       # Enable public key authentication
-      'RSAAuthentication' => 'yes',
-      'PubkeyAuthentication' => 'yes',
+      'RSAAuthentication'               => 'yes',
+      'PubkeyAuthentication'            => 'yes',
 
       # Never use host-based authentication. It can be exploited.
-      'IgnoreRhosts' => 'yes',
-      'IgnoreUserKnownHosts' => 'yes',
-      'RhostsRSAAuthentication' => 'no',
-      'HostbasedAuthentication' => 'no',
+      'IgnoreRhosts'                    => 'yes',
+      'IgnoreUserKnownHosts'            => 'yes',
+      'RhostsRSAAuthentication'         => 'no',
+      'HostbasedAuthentication'         => 'no',
 
-      # Disable password-based authentication, it can allow for potentially easier brute-force attacks.
-      'UsePAM' => 'no',
-      'PasswordAuthentication' => 'no',
-      'PermitEmptyPasswords' => 'no',
+      # Disable password-based authentication, it can allow for
+      # potentially easier brute-force attacks.
+      'UsePAM'                          => 'no',
+      'PasswordAuthentication'          => 'no',
+      'PermitEmptyPasswords'            => 'no',
       'ChallengeResponseAuthentication' => 'no',
 
       # Only enable Kerberos authentication if it is configured.
-      'KerberosAuthentication' => 'no',
-      'KerberosOrLocalPasswd' => 'no',
-      'KerberosTicketCleanup' => 'yes',
+      'KerberosAuthentication'          => 'no',
+      'KerberosOrLocalPasswd'           => 'no',
+      'KerberosTicketCleanup'           => 'yes',
       #KerberosGetAFSToken no
 
       # Only enable GSSAPI authentication if it is configured.
-      'GSSAPIAuthentication' => 'no',
-      'GSSAPICleanupCredentials' => 'yes',
+      'GSSAPIAuthentication'            => 'no',
+      'GSSAPICleanupCredentials'        => 'yes',
 
-      # In case you don't use PAM (`UsePAM no`), you can alternatively restrict users and groups here. For key-based authentication this is not necessary, since all keys must be explicitely enabled.
+      # In case you don't use PAM (`UsePAM no`), you can alternatively
+      # restrict users and groups here. For key-based authentication
+      # this is not necessary, since all keys must be explicitely enabled.
       #DenyUsers *
       #AllowUsers user1
       #DenyGroups *
@@ -195,36 +217,40 @@ class ssh_hardening::server (
       # Network
       # -------
 
-      # Disable TCP keep alive since it is spoofable. Use ClientAlive messages instead, they use the encrypted channel
-      'TCPKeepAlive' => 'no',
+      # Disable TCP keep alive since it is spoofable. Use ClientAlive
+      # messages instead, they use the encrypted channel
+      'TCPKeepAlive'                    => 'no',
 
-      # Manage `ClientAlive..` signals via interval and maximum count. This will periodically check up to a `..CountMax` number of times within `..Interval` timeframe, and abort the connection once these fail.
-      'ClientAliveInterval' => $client_alive_interval,
-      'ClientAliveCountMax' => $client_alive_count,
+      # Manage `ClientAlive..` signals via interval and maximum count.
+      # This will periodically check up to a `..CountMax` number of times
+      # within `..Interval` timeframe, and abort the connection once these fail.
+      'ClientAliveInterval'             => $client_alive_interval,
+      'ClientAliveCountMax'             => $client_alive_count,
 
       # Disable tunneling
-      'PermitTunnel' => 'no',
+      'PermitTunnel'                    => 'no',
 
       # Disable forwarding tcp connections.
       # no real advantage without denied shell access
-      'AllowTcpForwarding' => 'yes',
+      'AllowTcpForwarding'              => 'yes',
 
-      # Disable agent formwarding, since local agent could be accessed through forwarded connection.
-      # no real advantage without denied shell access
-      'AllowAgentForwarding' => 'yes',
+      # Disable agent formwarding, since local agent could be accessed through
+      # forwarded connection. No real advantage without denied shell access
+      'AllowAgentForwarding'            => 'yes',
 
       # Do not allow remote port forwardings to bind to non-loopback addresses.
-      'GatewayPorts' => 'no',
+      'GatewayPorts'                    => 'no',
 
-      # Disable X11 forwarding, since local X11 display could be accessed through forwarded connection.
-      'X11Forwarding' => 'no',
-      'X11UseLocalhost' => 'yes',
+      # Disable X11 forwarding, since local X11 display could be
+      # accessed through forwarded connection.
+      'X11Forwarding'                   => 'no',
+      'X11UseLocalhost'                 => 'yes',
 
       # Misc. configuration
       # ===================
 
-      'PrintMotd' => 'no',
-      'PrintLastLog' => 'no',
+      'PrintMotd'                       => 'no',
+      'PrintLastLog'                    => 'no',
       #Banner /etc/ssh/banner.txt
       #UseDNS yes
       #PidFile /var/run/sshd.pid
@@ -236,7 +262,7 @@ class ssh_hardening::server (
       ## override default of no subsystems
       ## Subsystem sftp /opt/app/openssh5/libexec/sftp-server
       #Subsystem sftp internal-sftp -l VERBOSE
-      # 
+      #
       ## These lines must appear at the *end* of sshd_config
       #Match Group sftponly
       #ForceCommand internal-sftp -l VERBOSE
