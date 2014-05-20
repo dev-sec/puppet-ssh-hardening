@@ -16,7 +16,3 @@ group :development, :test do
   gem 'puppet-lint'
   gem 'guard-rake'
 end
-
-# group :openstack do
-#   gem 'kitchen-openstack'
-# end
