@@ -40,24 +40,19 @@ class ssh_hardening::client (
   }
 
   if $cbc_required == true {
-    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,'+
-      'aes128-cbc,aes256-cbc,aes192-cbc'
+    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc'
   } else {
     $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr'
   }
 
   if $weak_hmac == true {
-    $macs = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,'+
-      'umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,'+
-      'hmac-sha1'
+    $macs = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1'
   } else {
-    $macs = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,'+
-      'umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
+    $macs = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
   }
 
   if $weak_kex == true {
-    $kex = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,'+
-      'diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1'
+    $kex = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1'
   } else {
     $kex = 'diffie-hellman-group-exchange-sha256'
   }
