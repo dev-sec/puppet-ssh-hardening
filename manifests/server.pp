@@ -68,8 +68,7 @@ class ssh_hardening::server (
   }
 
   if $cbc_required == true {
-    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,'+
-      'aes128-cbc,aes256-cbc,aes192-cbc'
+    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc'
   } else {
     $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr'
   }
@@ -81,13 +80,9 @@ class ssh_hardening::server (
   }
 
   if $weak_kex == true {
-    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,'+
-      'ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,'+
-      'diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,'+
-      'diffie-hellman-group1-sha1'
+    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1'
   } else {
-    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,'+
-      'diffie-hellman-group-exchange-sha256'
+    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256'
   }
 
   if $allow_root_with_key == true {
