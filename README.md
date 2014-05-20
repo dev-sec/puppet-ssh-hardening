@@ -43,7 +43,10 @@ You should configure core attributes:
 
 ## Contributors + Kudos
 
-...
+* Patrick Meier [atomic111](https://github.com/atomic111)
+* Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
+* Edmund Haselwanter [ehaselwanter](https://github.com/ehaselwanter)
+* Christoph Hartmann [chris-rock](https://github.com/chris-rock)
 
 ## License and Author
 
