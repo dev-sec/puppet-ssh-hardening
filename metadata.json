@@ -15,12 +15,5 @@
   ],
   "types": [
 
-  ],
-  "checksums": {
-    "Modulefile": "b0ded582c0ec70850e976fdfd7b55313",
-    "README.md": "4c4f9d79084afe722990acb22f76d77e",
-    "manifests/client.pp": "34db4b9557916d05e740bd9ad56e9e0c",
-    "manifests/init.pp": "ef4f21366553fd4973ccb3fe5ec4c0b3",
-    "manifests/server.pp": "662f499fb75626bf1a7facbf5e9fc788"
-  }
+  ]
 }
