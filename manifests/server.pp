@@ -61,34 +61,30 @@ class ssh_hardening::server (
   $allow_root_with_key   = false,
   $ipv6_enabled          = false
 ) {
-  if $ipv6_enabled == true {
-    $addressfamily = 'any'
-  } else {
-    $addressfamily = 'inet'
+
+  $addressfamily = $ipv6_enabled ? {
+    true  => 'any',
+    false => 'inet',
   }
 
-  if $cbc_required == true {
-    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc'
-  } else {
-    $ciphers = 'aes128-ctr,aes256-ctr,aes192-ctr'
+  $ciphers = $cbc_required ? {
+    true  => 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc',
+    false => 'aes128-ctr,aes256-ctr,aes192-ctr',
   }
 
-  if $weak_hmac == true {
-    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1'
-  } else {
-    $macs = 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160'
+  $macs = $weak_hmac ? {
+    true  => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1',
+    false => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160',
   }
 
-  if $weak_kex == true {
-    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1'
-  } else {
-    $kex = 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256'
+  $kex = $weak_kex ? {
+    true  => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1',
+    false => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256',
   }
 
-  if $allow_root_with_key == true {
-    $permit_root_login = 'without-password'
-  } else {
-    $permit_root_login = 'no'
+  $permit_root_login = $allow_root_with_key ? {
+    true  => 'without-password',
+    false => 'no',
   }
 
   class { 'ssh::server':
