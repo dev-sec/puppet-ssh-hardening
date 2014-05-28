@@ -59,7 +59,8 @@ class ssh_hardening(
   $client_alive_interval = 600,
   $client_alive_count    = 3,
   $allow_root_with_key   = false,
-  $ipv6_enabled          = false
+  $ipv6_enabled          = false,
+  $use_pam               = false,
 ) {
   class { 'ssh_hardening::server':
     cbc_required          => $cbc_required,
@@ -72,6 +73,7 @@ class ssh_hardening(
     client_alive_count    => $client_alive_count,
     allow_root_with_key   => $allow_root_with_key,
     ipv6_enabled          => $ipv6_enabled,
+    use_pam               => $use_pam,
   }
   class { 'ssh_hardening::client':
     ipv6_enabled => $ipv6_enabled,

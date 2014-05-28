@@ -59,7 +59,8 @@ class ssh_hardening::server (
   $client_alive_interval = 600,
   $client_alive_count    = 3,
   $allow_root_with_key   = false,
-  $ipv6_enabled          = false
+  $ipv6_enabled          = false,
+  $use_pam               = false,
 ) {
 
   $addressfamily = $ipv6_enabled ? {
@@ -84,6 +85,11 @@ class ssh_hardening::server (
 
   $permit_root_login = $allow_root_with_key ? {
     true  => 'without-password',
+    false => 'no',
+  }
+
+  $use_pam_option = $use_pam ? {
+    true  => 'yes',
     false => 'no',
   }
 
@@ -181,7 +187,7 @@ class ssh_hardening::server (
 
       # Disable password-based authentication, it can allow for
       # potentially easier brute-force attacks.
-      'UsePAM'                          => 'no',
+      'UsePAM'                          => $use_pam_option,
       'PasswordAuthentication'          => 'no',
       'PermitEmptyPasswords'            => 'no',
       'ChallengeResponseAuthentication' => 'no',
