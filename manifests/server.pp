@@ -41,6 +41,9 @@
 # [*ipv6_enabled*]
 #   Set to true if you need IPv6 support in SSH.
 #
+# [*use_pam*]
+#   Set to 'yes' if you need PAM support in SSH.
+#
 # === Copyright
 #
 # Copyright 2014, Deutsche Telekom AG
@@ -59,7 +62,8 @@ class ssh_hardening::server (
   $client_alive_interval = 600,
   $client_alive_count    = 3,
   $allow_root_with_key   = false,
-  $ipv6_enabled          = false
+  $ipv6_enabled          = false,
+  $use_pam               = 'no',
 ) {
   if $ipv6_enabled == true {
     $addressfamily = 'any'
@@ -185,7 +189,7 @@ class ssh_hardening::server (
 
       # Disable password-based authentication, it can allow for
       # potentially easier brute-force attacks.
-      'UsePAM'                          => 'no',
+      'UsePAM'                          => $use_pam,
       'PasswordAuthentication'          => 'no',
       'PermitEmptyPasswords'            => 'no',
       'ChallengeResponseAuthentication' => 'no',
