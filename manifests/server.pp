@@ -68,19 +68,23 @@ class ssh_hardening::server (
     false => 'inet',
   }
 
-  $ciphers = $cbc_required ? {
-    true  => 'aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc',
-    false => 'aes256-ctr,aes192-ctr,aes128-ctr',
-  }
+  case $operatingsystem {
+    default: {
+      $ciphers = $cbc_required ? {
+        true  => 'aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc',
+        false => 'aes256-ctr,aes192-ctr,aes128-ctr',
+      }
 
-  $macs = $weak_hmac ? {
-    true  => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1',
-    false => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160',
-  }
+      $macs = $weak_hmac ? {
+        true  => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1',
+        false => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160',
+      }
 
-  $kex = $weak_kex ? {
-    true  => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1',
-    false => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256',
+      $kex = $weak_kex ? {
+        true  => 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-exchange-sha1',
+        false => 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1',
+      }
+    }
   }
 
   $permit_root_login = $allow_root_with_key ? {
