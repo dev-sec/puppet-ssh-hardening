@@ -69,13 +69,13 @@ class ssh_hardening::server (
   }
 
   $ciphers = $cbc_required ? {
-    true  => 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc',
-    false => 'aes128-ctr,aes256-ctr,aes192-ctr',
+    true  => 'aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc',
+    false => 'aes256-ctr,aes192-ctr,aes128-ctr',
   }
 
   $macs = $weak_hmac ? {
-    true  => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1',
-    false => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160',
+    true  => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1',
+    false => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160',
   }
 
   $kex = $weak_kex ? {
