@@ -260,4 +260,11 @@ class ssh_hardening::server (
       #X11Forwarding no
     },
   }
+
+  file {'/etc/ssh':
+    mode  => '0755',
+    owner => 'root',
+    group => 'root'
+  }
+
 }
