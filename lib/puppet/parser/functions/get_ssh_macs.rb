@@ -3,8 +3,8 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
   osrelease = args[1]
   weak_macs = args[2] ? 'weak' : 'default'
 
-  macs53 = {}
-  macs53.default = 'hmac-ripemd160,hmac-sha1'
+  macs_53 = {}
+  macs_53.default = 'hmac-ripemd160,hmac-sha1'
 
   macs_59 = {}
   macs_59.default = 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160'
