@@ -68,15 +68,7 @@ class ssh_hardening::server (
     false => 'inet',
   }
 
-  case $operatingsystem {
-    default: {
-      $ciphers = $cbc_required ? {
-        true  => 'aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc',
-        false => 'aes256-ctr,aes192-ctr,aes128-ctr',
-      }
-    }
-  }
-
+  $ciphers = get_ssh_ciphers($operatingsystem, $operatingsystemrelease, $cbc_required)
   $macs = get_ssh_macs($operatingsystem, $operatingsystemrelease, $weak_hmac)
   $kex = get_ssh_kex($operatingsystem, $operatingsystemrelease, $weak_hmac)
 
