@@ -1,5 +1,5 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
-  os = args[0]
+  os = args[0].downcase
   osrelease = args[1]
   weak_kex = args[2] ? 'weak' : 'default'
 
