@@ -1,7 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   os = args[0]
   osrelease = args[1]
-  weak_kex = args[2] ? 'default' : 'weak'
+  weak_kex = args[2] ? 'weak' : 'default'
 
   kex_59 = {}
   kex_59.default = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1'

@@ -1,7 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_ciphers, :type => :rvalue) do |args|
   os = args[0]
   osrelease = args[1]
-  weak_ciphers = args[2] ? 'default' : 'weak'
+  weak_ciphers = args[2] ? 'weak' : 'default'
 
   ciphers_59 = {}
   ciphers_59.default = 'aes256-ctr,aes192-ctr,aes128-ctr'
