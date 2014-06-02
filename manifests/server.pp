@@ -70,7 +70,7 @@ class ssh_hardening::server (
 
   $ciphers = get_ssh_ciphers($::operatingsystem, $::operatingsystemrelease, $::cbc_required)
   $macs = get_ssh_macs($::operatingsystem, $::operatingsystemrelease, $::weak_hmac)
-  $kex = get_ssh_kex($::operatingsystem, $::operatingsystemrelease, $::weak_hmac)
+  $kex = get_ssh_kex($::operatingsystem, $::operatingsystemrelease, $::weak_kex)
 
   $permit_root_login = $allow_root_with_key ? {
     true  => 'without-password',
