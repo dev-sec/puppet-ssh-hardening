@@ -46,21 +46,23 @@
 # Copyright 2014, Deutsche Telekom AG
 #
 class ssh_hardening::server (
-  $cbc_required          = false,
-  $weak_hmac             = false,
-  $weak_kex              = false,
-  $ports                 = [ 22 ],
-  $listen_to             = [ '0.0.0.0' ],
-  $host_key_files        = [
+  $cbc_required           = false,
+  $weak_hmac              = false,
+  $weak_kex               = false,
+  $ports                  = [ 22 ],
+  $listen_to              = [ '0.0.0.0' ],
+  $host_key_files         = [
     '/etc/ssh/ssh_host_rsa_key',
     '/etc/ssh/ssh_host_dsa_key',
     '/etc/ssh/ssh_host_ecdsa_key'
     ],
-  $client_alive_interval = 600,
-  $client_alive_count    = 3,
-  $allow_root_with_key   = false,
-  $ipv6_enabled          = false,
-  $use_pam               = false,
+  $client_alive_interval  = 600,
+  $client_alive_count     = 3,
+  $allow_root_with_key    = false,
+  $ipv6_enabled           = false,
+  $use_pam                = false,
+  $allow_tcp_forwarding   = false,
+  $allow_agent_forwarding = false,
 ) {
 
   $addressfamily = $ipv6_enabled ? {
@@ -91,6 +93,16 @@ class ssh_hardening::server (
   $use_pam_option = $use_pam ? {
     true  => 'yes',
     false => 'no',
+  }
+
+  $tcp_forwarding = $allow_tcp_forwarding ? {
+    true  => 'yes',
+    false => 'no'
+  }
+
+  $agent_forwarding = $allow_agent_forwarding ? {
+    true  => 'yes',
+    false => 'no'
   }
 
   class { 'ssh::server':
@@ -229,11 +241,11 @@ class ssh_hardening::server (
 
       # Disable forwarding tcp connections.
       # no real advantage without denied shell access
-      'AllowTcpForwarding'              => 'yes',
+      'AllowTcpForwarding'              => $tcp_forwarding,
 
       # Disable agent formwarding, since local agent could be accessed through
       # forwarded connection. No real advantage without denied shell access
-      'AllowAgentForwarding'            => 'yes',
+      'AllowAgentForwarding'            => $agent_forwarding,
 
       # Do not allow remote port forwardings to bind to non-loopback addresses.
       'GatewayPorts'                    => 'no',

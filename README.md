@@ -20,6 +20,8 @@ This module provides secure ssh-client and ssh-server configurations.
 * `ports = [ 22 ]` - ports to which ssh-server should listen to and ssh-client should connect to
 * `listen_to = [ "0.0.0.0" ]` - one or more ip addresses, to which ssh-server should listen to. Default is empty, but should be configured for security reasons!
 * `remote_hosts` - one or more hosts, to which ssh-client can connect to. Default is empty, but should be configured for security reasons!
+* `allow_tcp_forwarding = false` - set to true to allow TCP forwarding
+* `allow_agent_forwarding = false` - set to true to allow Agent forwarding
 
 ## Usage
 

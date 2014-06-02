@@ -41,6 +41,12 @@
 # [*ipv6_enabled*]
 #   Set to true if you need IPv6 support in SSH.
 #
+# [*allow_tcp_forwarding*]
+#   Set to true to allow TCP forwarding
+#
+# [*allow_agent_forwarding*]
+#   Set to true to allow Agent forwarding
+#
 # === Copyright
 #
 # Copyright 2014, Deutsche Telekom AG
@@ -61,19 +67,23 @@ class ssh_hardening(
   $allow_root_with_key   = false,
   $ipv6_enabled          = false,
   $use_pam               = false,
+  $allow_tcp_forwarding   = false,
+  $allow_agent_forwarding = false,
 ) {
   class { 'ssh_hardening::server':
-    cbc_required          => $cbc_required,
-    weak_hmac             => $weak_hmac,
-    weak_kex              => $weak_kex,
-    ports                 => $ports,
-    listen_to             => $listen_to,
-    host_key_files        => $host_key_files,
-    client_alive_interval => $client_alive_interval,
-    client_alive_count    => $client_alive_count,
-    allow_root_with_key   => $allow_root_with_key,
-    ipv6_enabled          => $ipv6_enabled,
-    use_pam               => $use_pam,
+    cbc_required           => $cbc_required,
+    weak_hmac              => $weak_hmac,
+    weak_kex               => $weak_kex,
+    ports                  => $ports,
+    listen_to              => $listen_to,
+    host_key_files         => $host_key_files,
+    client_alive_interval  => $client_alive_interval,
+    client_alive_count     => $client_alive_count,
+    allow_root_with_key    => $allow_root_with_key,
+    ipv6_enabled           => $ipv6_enabled,
+    use_pam                => $use_pam,
+    allow_tcp_forwarding   => false,
+    allow_agent_forwarding => false,
   }
   class { 'ssh_hardening::client':
     ipv6_enabled => $ipv6_enabled,
