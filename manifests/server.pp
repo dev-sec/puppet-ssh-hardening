@@ -79,13 +79,10 @@ class ssh_hardening::server (
         true  => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1',
         false => 'hmac-sha2-512,hmac-sha2-256,hmac-ripemd160',
       }
-
-      $kex = $weak_kex ? {
-        true  => 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-exchange-sha1',
-        false => 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1',
-      }
     }
   }
+
+  $kex = get_ssh_kex($operatingsystem, $operatingsystemrelease, $weak_hmac)
 
   $permit_root_login = $allow_root_with_key ? {
     true  => 'without-password',
