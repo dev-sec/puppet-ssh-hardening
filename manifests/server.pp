@@ -115,6 +115,9 @@ class ssh_hardening::server (
       # in here, since otherwise sshd will listen to everyone.
       'ListenAddress'                   => $listen_to,
 
+      # Define the HostKey
+      'HostKey'                         => $host_key_files,
+
       # Security configuration
       # ======================
 
