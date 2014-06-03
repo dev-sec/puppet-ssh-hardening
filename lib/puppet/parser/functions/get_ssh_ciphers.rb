@@ -30,6 +30,7 @@ Puppet::Parser::Functions::newfunction(:get_ssh_ciphers, :type => :rvalue) do |a
   m['redhat'].default = ciphers_53
 
   m['centos'] = m['redhat']
+  m['oraclelinux'] = m['redhat']
 
   m[os][osrelease][weak_ciphers]
 end

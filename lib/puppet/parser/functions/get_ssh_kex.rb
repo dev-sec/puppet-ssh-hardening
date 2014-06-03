@@ -30,6 +30,7 @@ Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   m['redhat'].default = kex_59
 
   m['centos'] = m['redhat']
+  m['oraclelinux'] = m['redhat']
 
   m[os][osrelease][weak_kex]
 end
