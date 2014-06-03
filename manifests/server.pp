@@ -68,20 +68,9 @@ class ssh_hardening::server (
     false => 'inet',
   }
 
-  $ciphers = $cbc_required ? {
-    true  => 'aes128-ctr,aes256-ctr,aes192-ctr,aes128-cbc,aes256-cbc,aes192-cbc',
-    false => 'aes128-ctr,aes256-ctr,aes192-ctr',
-  }
-
-  $macs = $weak_hmac ? {
-    true  => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160,hmac-sha1',
-    false => 'hmac-sha2-256,hmac-sha2-512,hmac-ripemd160',
-  }
-
-  $kex = $weak_kex ? {
-    true  => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1',
-    false => 'ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256',
-  }
+  $ciphers = get_ssh_ciphers($::operatingsystem, $::operatingsystemrelease, $cbc_required)
+  $macs = get_ssh_macs($::operatingsystem, $::operatingsystemrelease, $weak_hmac)
+  $kex = get_ssh_kex($::operatingsystem, $::operatingsystemrelease, $weak_kex)
 
   $permit_root_login = $allow_root_with_key ? {
     true  => 'without-password',
@@ -271,4 +260,11 @@ class ssh_hardening::server (
       #X11Forwarding no
     },
   }
+
+  file {'/etc/ssh':
+    mode  => '0755',
+    owner => 'root',
+    group => 'root'
+  }
+
 }
