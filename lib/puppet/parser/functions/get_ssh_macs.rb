@@ -33,6 +33,7 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
   m['redhat'].default = macs_53
 
   m['centos'] = m['redhat']
+  m['oraclelinux'] = m['redhat']
 
   m[os][osrelease][weak_macs]
 end
