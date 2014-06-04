@@ -1,6 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
+  osmajor = osrelease.sub(/\..*/,'')
   weak_macs = args[2] ? 'weak' : 'default'
 
   macs_53 = {}
@@ -23,18 +24,17 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
   m.default = default_vmap
 
   m['ubuntu'] = {}
-  m['ubuntu']['12.04'] = macs_59
-  m['ubuntu']['14.04'] = macs_66
+  m['ubuntu']['12'] = macs_59
+  m['ubuntu']['14'] = macs_66
   m['ubuntu'].default = macs_59
 
   m['redhat'] = {}
-  m['redhat']['6.4'] = macs_53
-  m['redhat']['6.5'] = macs_53
+  m['redhat']['6'] = macs_53
   m['redhat'].default = macs_53
 
   m['centos'] = m['redhat']
   m['oraclelinux'] = m['redhat']
 
-  m[os][osrelease][weak_macs]
+  m[os][osmajor][weak_macs]
 end
 

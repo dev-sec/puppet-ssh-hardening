@@ -1,6 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
+  osmajor = osrelease.sub(/\..*/,'')
   weak_kex = args[2] ? 'weak' : 'default'
 
   kex_59 = {}
@@ -20,17 +21,16 @@ Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   m.default = default_vmap
 
   m['ubuntu'] = {}
-  m['ubuntu']['12.04'] = kex_59
-  m['ubuntu']['14.04'] = kex_66
+  m['ubuntu']['12'] = kex_59
+  m['ubuntu']['14'] = kex_66
   m['ubuntu'].default = kex_59
 
   m['redhat'] = {}
-  m['redhat']['6.4'] = ''
-  m['redhat']['6.5'] = ''
+  m['redhat']['6'] = ''
   m['redhat'].default = kex_59
 
   m['centos'] = m['redhat']
   m['oraclelinux'] = m['redhat']
 
-  m[os][osrelease][weak_kex]
+  m[os][osmajor][weak_kex]
 end
