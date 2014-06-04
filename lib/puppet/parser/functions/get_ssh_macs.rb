@@ -28,6 +28,11 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
   m['ubuntu']['14'] = macs_66
   m['ubuntu'].default = macs_59
 
+  m['debian'] = {}
+  m['debian']['6'] = macs_53
+  m['debian']['7'] = macs_59
+  m['debian'].default = macs_59
+
   m['redhat'] = {}
   m['redhat']['6'] = macs_53
   m['redhat'].default = macs_53

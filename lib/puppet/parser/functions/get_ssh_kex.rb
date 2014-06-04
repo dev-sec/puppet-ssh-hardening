@@ -25,6 +25,11 @@ Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   m['ubuntu']['14'] = kex_66
   m['ubuntu'].default = kex_59
 
+  m['debian'] = {}
+  m['debian']['6'] = ''
+  m['debian']['7'] = kex_59
+  m['debian'].default = kex_59
+
   m['redhat'] = {}
   m['redhat']['6'] = ''
   m['redhat'].default = kex_59
