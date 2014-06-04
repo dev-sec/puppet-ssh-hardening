@@ -1,6 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_ciphers, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
+  osmajor = osrelease.sub(/\..*/,'')
   weak_ciphers = args[2] ? 'weak' : 'default'
 
   ciphers_53 = {}
@@ -20,18 +21,17 @@ Puppet::Parser::Functions::newfunction(:get_ssh_ciphers, :type => :rvalue) do |a
   m.default = default_vmap
 
   m['ubuntu'] = {}
-  m['ubuntu']['12.04'] = ciphers_53
-  m['ubuntu']['14.04'] = ciphers_66
+  m['ubuntu']['12'] = ciphers_53
+  m['ubuntu']['14'] = ciphers_66
   m['ubuntu'].default = ciphers_53
 
   m['redhat'] = {}
-  m['redhat']['6.4'] = ciphers_53
-  m['redhat']['6.5'] = ciphers_53
+  m['redhat']['6'] = ciphers_53
   m['redhat'].default = ciphers_53
 
   m['centos'] = m['redhat']
   m['oraclelinux'] = m['redhat']
 
-  m[os][osrelease][weak_ciphers]
+  m[os][osmajor][weak_ciphers]
 end
 
