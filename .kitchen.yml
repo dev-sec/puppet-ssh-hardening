@@ -33,14 +33,14 @@ platforms:
     box: oracle-6.4
     box_url: https://dl.dropbox.com/sh/yim9oyqajopoiqs/G-XIEmQJMb/oracle64-64.box
 
-- name: debian-squezze-6
+- name: debian-6
   driver_config:
-    box: debian-squezze-6
+    box: debian-6
     box_url: http://public.sphax3d.org/vagrant/squeeze64.box
 
-- name: debian-wheezy-7
+- name: debian-7
   driver_config:
-    box: debian-wheezy-7
+    box: debian-7
     box_url: https://dl.dropboxusercontent.com/s/cd583cuf0mbcix7/debian-wheezy-64-chef.box
 
 suites:
