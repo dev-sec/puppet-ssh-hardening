@@ -8,3 +8,4 @@ test/integration
 
 Gemfile.lock
 Puppetfile.lock
+spec/fixtures
