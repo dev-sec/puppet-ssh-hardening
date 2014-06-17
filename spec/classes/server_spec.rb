@@ -1,0 +1,120 @@
+require 'spec_helper'
+
+describe 'ssh_hardening::server' do
+
+  let(:facts) {{
+    :osfamily => 'redhat'
+  }}
+
+  it do
+    should contain_file('/etc/ssh').with({
+      'ensure' => 'directory',
+      'owner' => 'root',
+      'group' => 'root',
+      'mode' => '0755'
+    })
+  end
+
+  it{ should contain_class('ssh::server').with_storeconfigs_enabled(false) }
+
+  # default configuration
+  expect_option('ssh::server','Port',['22'])
+  # user configuration
+  context 'with ports => [8022]' do
+    let(:params) { {:ports => [8022] } }
+    expect_option('ssh::server','Port',['8022'])
+  end
+
+  # default configuration
+  expect_option('ssh::server','ListenAddress',['0.0.0.0'])
+  # user configuration
+  context 'with listen_to => 1.2.3.4' do
+    let(:params) { {:listen_to => '1.2.3.4' } }
+    expect_option('ssh::server','ListenAddress','1.2.3.4')
+  end
+
+  # default configuration
+  expect_option('ssh::server','HostKey',[])
+  # user configuration
+  context 'with host_key_files => [/a/file]' do
+    let(:params) { {:host_key_files => ['/a/file'] } }
+    expect_option('ssh::server','HostKey',['/a/file'])
+  end
+
+  # default configuration
+  expect_option('ssh::server','ClientAliveInterval','600')
+  # user configuration
+  context 'with client_alive_interval => 300' do
+    let(:params) { {:client_alive_interval => 300 } }
+    expect_option('ssh::server','ClientAliveInterval','300')
+  end
+
+  # default configuration
+  expect_option('ssh::server','ClientAliveCountMax','3')
+  # user configuration
+  context 'with client_alive_count => 2' do
+    let(:params) { {:client_alive_count => 2 } }
+    expect_option('ssh::server','ClientAliveCountMax','2')
+  end
+
+  # default configuration
+  expect_option('ssh::server','PermitRootLogin','no')
+  # user configuration
+  context 'with allow_root_with_key => true' do
+    let(:params) { {:allow_root_with_key => true } }
+    expect_option('ssh::server','PermitRootLogin','without-password')
+  end
+  context 'with allow_root_with_key => false' do
+    let(:params) { {:allow_root_with_key => false } }
+    expect_option('ssh::server','PermitRootLogin','no')
+  end
+
+  # default configuration
+  expect_option('ssh::server','AddressFamily','inet')
+  # user configuration
+  context 'with ipv6_enabled => true' do
+    let(:params) { {:ipv6_enabled => true } }
+    expect_option('ssh::server','AddressFamily','any')
+  end
+  context 'with ipv6_enabled => false' do
+    let(:params) { {:ipv6_enabled => false } }
+    expect_option('ssh::server','AddressFamily','inet')
+  end
+
+  # default configuration
+  expect_option('ssh::server','UsePAM','no')
+  # user configuration
+  context 'with use_pam => true' do
+    let(:params) { {:use_pam => true } }
+    expect_option('ssh::server','UsePAM','yes')
+  end
+  context 'with use_pam => false' do
+    let(:params) { {:use_pam => false } }
+    expect_option('ssh::server','UsePAM','no')
+  end
+
+  # default configuration
+  expect_option('ssh::server','AllowTcpForwarding','no')
+  # user configuration
+  context 'with allow_tcp_forwarding => true' do
+    let(:params) { {:allow_tcp_forwarding => true } }
+    expect_option('ssh::server','AllowTcpForwarding','yes')
+  end
+  context 'with allow_tcp_forwarding => true' do
+    let(:params) { {:allow_tcp_forwarding => false } }
+    expect_option('ssh::server','AllowTcpForwarding','no')
+  end
+
+  # default configuration
+  expect_option('ssh::server','AllowAgentForwarding','no')
+  # user configuration
+  context 'with allow_agent_forwarding => true' do
+    let(:params) { {:allow_agent_forwarding => true } }
+    expect_option('ssh::server','AllowAgentForwarding','yes')
+  end
+  context 'with allow_agent_forwarding => false' do
+    let(:params) { {:allow_agent_forwarding => false } }
+    expect_option('ssh::server','AllowAgentForwarding','no')
+  end
+
+end

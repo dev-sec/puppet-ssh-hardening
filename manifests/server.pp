@@ -273,9 +273,10 @@ class ssh_hardening::server (
   }
 
   file {'/etc/ssh':
-    mode  => '0755',
-    owner => 'root',
-    group => 'root'
+    ensure => 'directory',
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root'
   }
 
 }
