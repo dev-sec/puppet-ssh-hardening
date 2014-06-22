@@ -18,15 +18,17 @@ end
 # @return Creates an rspec test to check this expectation.
 def expect_option(klass, key, val)
   # test each option
-  it{ should contain_class(klass).with_options(
-    lambda do |map|
-      if map[key] == val
-        true
-      else
-        raise "#{klass} option #{key.inspect} doesn't match (-- expected, ++ actual):\n"+
-          "-- #{val.inspect}\n"+
-          "++ #{map[key].inspect}\n"
+  it do
+    should contain_class(klass).with_options(
+      lambda do |map|
+        if map[key] == val
+          true
+        else
+          fail "#{klass} option #{key.inspect} doesn't match (-- expected, ++ actual):\n"\
+            "-- #{val.inspect}\n"\
+            "++ #{map[key].inspect}\n"
+        end
       end
-    end
-  )}
+    )
+  end
 end
