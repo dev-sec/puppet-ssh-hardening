@@ -1,4 +1,4 @@
-Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args|
+Puppet::Parser::Functions.newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
   osmajor = osrelease.sub(/\..*/, '')
