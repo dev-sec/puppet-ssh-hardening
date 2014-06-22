@@ -1,7 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
-  osmajor = osrelease.sub(/\..*/,'')
+  osmajor = osrelease.sub(/\..*/, '')
   weak_macs = args[2] ? 'weak' : 'default'
 
   macs_53 = {}

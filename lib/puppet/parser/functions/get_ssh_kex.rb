@@ -1,7 +1,7 @@
 Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
-  osmajor = osrelease.sub(/\..*/,'')
+  osmajor = osrelease.sub(/\..*/, '')
   weak_kex = args[2] ? 'weak' : 'default'
 
   kex_59 = {}
