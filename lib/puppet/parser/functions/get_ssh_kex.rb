@@ -15,7 +15,7 @@ Puppet::Parser::Functions::newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   # creat the default version map (if os + version are default)
   default_vmap = {}
   default_vmap.default = kex_59
-  
+
   # create the main map
   m = {}
   m.default = default_vmap
