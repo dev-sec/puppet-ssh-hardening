@@ -16,7 +16,7 @@ end
 # @param key [String] the key in the class' options map to test
 # @param val [String] the value in the class' options map to expect
 # @return Creates an rspec test to check this expectation.
-def expect_option klass, key, val
+def expect_option(klass, key, val)
   # test each option
   it{ should contain_class(klass).with_options(
     lambda do |map|
