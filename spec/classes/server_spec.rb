@@ -7,12 +7,12 @@ describe 'ssh_hardening::server' do
   end
 
   it do
-    should contain_file('/etc/ssh').with({
-      'ensure' => 'directory',
-      'owner' => 'root',
-      'group' => 'root',
-      'mode' => '0755'
-    })
+    should contain_file('/etc/ssh').with(
+                                           'ensure' => 'directory',
+                                           'owner' => 'root',
+                                           'group' => 'root',
+                                           'mode' => '0755'
+                                         )
   end
 
   it { should contain_class('ssh::server').with_storeconfigs_enabled(false) }
