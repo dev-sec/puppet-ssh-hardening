@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Puppet::Parser::Functions.newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
