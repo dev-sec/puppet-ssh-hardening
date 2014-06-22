@@ -4,8 +4,8 @@ describe 'get_ssh_ciphers' do
   include RSpec::Puppet::Support
   let(:scope) { PuppetlabsSpec::PuppetInternals.scope }
 
-  it "should exist" do
-    Puppet::Parser::Functions.function("get_ssh_ciphers").should == "function_get_ssh_ciphers"
+  it 'should exist' do
+    Puppet::Parser::Functions.function('get_ssh_ciphers').should == 'function_get_ssh_ciphers'
   end
 
   it 'should get the correct ciphers (default)' do

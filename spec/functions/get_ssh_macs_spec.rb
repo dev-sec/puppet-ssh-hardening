@@ -4,8 +4,8 @@ describe 'get_ssh_macs' do
   include RSpec::Puppet::Support
   let(:scope) { PuppetlabsSpec::PuppetInternals.scope }
 
-  it "should exist" do
-    Puppet::Parser::Functions.function("get_ssh_macs").should == "function_get_ssh_macs"
+  it 'should exist' do
+    Puppet::Parser::Functions.function('get_ssh_macs').should == 'function_get_ssh_macs'
   end
 
   it 'should get the correct macs (default)' do
