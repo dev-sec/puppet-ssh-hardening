@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'ssh_hardening::server' do
 
-  let(:facts) {{
-    :osfamily => 'redhat'
-  }}
+  let(:facts) do
+    { :osfamily => 'redhat' }
+  end
 
   it do
     should contain_file('/etc/ssh').with({

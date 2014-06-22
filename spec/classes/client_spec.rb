@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe 'ssh_hardening::client' do
 
-  let(:facts) {{
-    :osfamily => 'redhat'
-  }}
+  let(:facts) do
+    { :osfamily => 'redhat' }
+  end
 
   it { should contain_class('ssh::client').with_storeconfigs_enabled(false) }
 
