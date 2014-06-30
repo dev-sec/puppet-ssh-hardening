@@ -11,6 +11,9 @@
     {
       "name": "saz/ssh",
       "version_requirement": "2.3.6"
+    },{
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.2.0"
     }
   ],
   "types": [
