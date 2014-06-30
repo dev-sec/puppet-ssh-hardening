@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'puppetlabs_spec_helper/module_spec_helper'
 
 fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
@@ -16,17 +18,19 @@ end
 # @param key [String] the key in the class' options map to test
 # @param val [String] the value in the class' options map to expect
 # @return Creates an rspec test to check this expectation.
-def expect_option klass, key, val
+def expect_option(klass, key, val)
   # test each option
-  it{ should contain_class(klass).with_options(
-    lambda do |map|
-      if map[key] == val
-        true
-      else
-        raise "#{klass} option #{key.inspect} doesn't match (-- expected, ++ actual):\n"+
-          "-- #{val.inspect}\n"+
-          "++ #{map[key].inspect}\n"
+  it do
+    should contain_class(klass).with_options(
+      lambda do |map|
+        if map[key] == val
+          true
+        else
+          fail "#{klass} option #{key.inspect} doesn't match (-- expected, ++ actual):\n"\
+            "-- #{val.inspect}\n"\
+            "++ #{map[key].inspect}\n"
+        end
       end
-    end
-  )}
+    )
+  end
 end

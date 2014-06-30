@@ -1,7 +1,9 @@
-Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args|
+# encoding: utf-8
+
+Puppet::Parser::Functions.newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   os = args[0].downcase
   osrelease = args[1]
-  osmajor = osrelease.sub(/\..*/,'')
+  osmajor = osrelease.sub(/\..*/, '')
   weak_macs = args[2] ? 'weak' : 'default'
 
   macs_53 = {}
@@ -18,7 +20,7 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
   # creat the default version map (if os + version are default)
   default_vmap = {}
   default_vmap.default = macs_59
-  
+
   # create the main map
   m = {}
   m.default = default_vmap
@@ -42,4 +44,3 @@ Puppet::Parser::Functions::newfunction(:get_ssh_macs, :type => :rvalue) do |args
 
   m[os][osmajor][weak_macs]
 end
-

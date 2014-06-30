@@ -1,31 +1,33 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe 'ssh_hardening::client' do
 
-  let(:facts) {{
-    :osfamily => 'redhat'
-  }}
+  let(:facts) do
+    { :osfamily => 'redhat' }
+  end
 
-  it{ should contain_class('ssh::client').with_storeconfigs_enabled(false) }
+  it { should contain_class('ssh::client').with_storeconfigs_enabled(false) }
 
   # default configuration
-  expect_option('ssh::client','Port',['22'])
+  expect_option('ssh::client', 'Port', ['22'])
   # user configuration
   context 'with ports => [8022]' do
-    let(:params) { {:ports => [8022] } }
-    expect_option('ssh::client','Port',['8022'])
+    let(:params) { { :ports => [8022] } }
+    expect_option('ssh::client', 'Port', ['8022'])
   end
 
   # default configuration
-  expect_option('ssh::client','AddressFamily','inet')
+  expect_option('ssh::client', 'AddressFamily', 'inet')
   # user configuration
   context 'with ipv6_enabled => true' do
-    let(:params) { {:ipv6_enabled => true } }
-    expect_option('ssh::client','AddressFamily','any')
+    let(:params) { { :ipv6_enabled => true } }
+    expect_option('ssh::client', 'AddressFamily', 'any')
   end
   context 'with ipv6_enabled => false' do
-    let(:params) { {:ipv6_enabled => false } }
-    expect_option('ssh::client','AddressFamily','inet')
+    let(:params) { { :ipv6_enabled => false } }
+    expect_option('ssh::client', 'AddressFamily', 'inet')
   end
 
 end
