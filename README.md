@@ -7,7 +7,7 @@ This module provides secure ssh-client and ssh-server configurations.
 ## Requirements
 
 * Puppet
-* Puppet modules: `saz/ssh`
+* Puppet modules: `saz/ssh` (>= 2.3.6), `puppetlabs/stdlib` (>= 4.2.0)
 
 
 ## Parameters
@@ -45,10 +45,11 @@ You should configure core attributes:
 
 ## Contributors + Kudos
 
-* Patrick Meier [atomic111](https://github.com/atomic111)
-* Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
 * Edmund Haselwanter [ehaselwanter](https://github.com/ehaselwanter)
 * Christoph Hartmann [chris-rock](https://github.com/chris-rock)
+* Patrick Meier [atomic111](https://github.com/atomic111)
+* Kurt Huwig [kurthuwig](https://github.com/kurthuwig)
+* Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
 
 ## License and Author
 
