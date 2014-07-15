@@ -22,6 +22,7 @@ This module provides secure ssh-client and ssh-server configurations.
 * `remote_hosts` - one or more hosts, to which ssh-client can connect to. Default is empty, but should be configured for security reasons!
 * `allow_tcp_forwarding = false` - set to true to allow TCP forwarding
 * `allow_agent_forwarding = false` - set to true to allow Agent forwarding
+* `use_pam = false` to disable pam authentication
 
 ## Usage
 
