@@ -1,3 +1,10 @@
+# === Copyright
+#
+# Copyright 2014, Deutsche Telekom AG
+# Licensed under the Apache License, Version 2.0 (the "License");
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+
 # == Class: ssh_hardening::client
 #
 # The default SSH class which installs the SSH client
@@ -21,10 +28,6 @@
 #
 # [*ipv6_enabled*]
 #   Set to true if you need IPv6 support in SSH.
-#
-# === Copyright
-#
-# Copyright 2014, Deutsche Telekom AG
 #
 class ssh_hardening::client (
   $cbc_required = false,

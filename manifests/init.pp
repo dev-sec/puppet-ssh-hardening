@@ -1,3 +1,10 @@
+# === Copyright
+#
+# Copyright 2014, Deutsche Telekom AG
+# Licensed under the Apache License, Version 2.0 (the "License");
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+
 # == Class: ssh_hardening
 #
 # The default SSH class which installs the SSH server and client
@@ -46,10 +53,6 @@
 #
 # [*allow_agent_forwarding*]
 #   Set to true to allow Agent forwarding
-#
-# === Copyright
-#
-# Copyright 2014, Deutsche Telekom AG
 #
 class ssh_hardening(
   $cbc_required          = false,
