@@ -44,6 +44,24 @@ You should configure core attributes:
 **The default value for `listen_to` is `0.0.0.0`. It is highly recommended to change the value.**
 
 
+## FAQ / Pitfalls
+
+**I can't log into my account. I have registered the client key, but it still doesn't let me it.**
+
+If you have exhausted all typical issues (firewall, network, key missing, wrong key, account disabled etc.), it may be that your account is locked. The quickest way to find out is to look at the password hash for your user:
+
+    sudo grep myuser /etc/shadow
+
+If the hash includes an `!`, your account is locked:
+
+    myuser:!:16280:7:60:7:::
+
+The proper way to solve this is to unlock the account (`passwd -u myuser`). If the user doesn't have a password, you should can unlock it via:
+
+    usermod -p "*" myuser
+
+Alternatively, if you intend to use PAM, you enabled it via `use_pam = true`. PAM will allow locked users to get in with keys.
+
 ## Contributors + Kudos
 
 * Edmund Haselwanter [ehaselwanter](https://github.com/ehaselwanter)
