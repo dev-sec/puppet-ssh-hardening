@@ -54,6 +54,9 @@
 # [*allow_agent_forwarding*]
 #   Set to true to allow Agent forwarding
 #
+# [*server_options*]
+#   Allow override of default server settings provided by the module.
+#
 # [*client_options*]
 #   Allow override of default client settings provided by the module.
 #
@@ -75,6 +78,7 @@ class ssh_hardening(
   $use_pam               = false,
   $allow_tcp_forwarding   = false,
   $allow_agent_forwarding = false,
+  $server_options         = {},
   $client_options         = {},
 ) {
   class { 'ssh_hardening::server':
@@ -91,6 +95,7 @@ class ssh_hardening(
     use_pam                => $use_pam,
     allow_tcp_forwarding   => false,
     allow_agent_forwarding => false,
+    options                => $server_options,
   }
   class { 'ssh_hardening::client':
     ipv6_enabled => $ipv6_enabled,
