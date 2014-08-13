@@ -23,6 +23,7 @@ This module provides secure ssh-client and ssh-server configurations.
 * `allow_tcp_forwarding = false` - set to true to allow TCP forwarding
 * `allow_agent_forwarding = false` - set to true to allow Agent forwarding
 * `use_pam = false` to disable pam authentication
+* `client_options = {}` - set values in the hash to override the module's settings
 
 ## Usage
 

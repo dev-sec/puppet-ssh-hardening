@@ -29,11 +29,15 @@
 # [*ipv6_enabled*]
 #   Set to true if you need IPv6 support in SSH.
 #
+# [*options*]
+#   Allow override of default settings provided by the module.
+#
 class ssh_hardening::client (
   $cbc_required = false,
   $weak_hmac = false,
   $weak_kex = false,
   $ports = [ 22 ],
+  $options      = {},
   $ipv6_enabled = false
 ) {
   if $ipv6_enabled == true {
@@ -135,8 +139,10 @@ class ssh_hardening::client (
     #VisualHostKey yes
   }
 
+  $merged_options = merge($ssh_options, $options)
+
   class { 'ssh::client':
     storeconfigs_enabled => false,
-    options              => delete_undef_values($ssh_options),
+    options              => delete_undef_values($merged_options),
   }
 }

@@ -54,6 +54,9 @@
 # [*allow_agent_forwarding*]
 #   Set to true to allow Agent forwarding
 #
+# [*client_options*]
+#   Allow override of default client settings provided by the module.
+#
 class ssh_hardening(
   $cbc_required          = false,
   $weak_hmac             = false,
@@ -72,6 +75,7 @@ class ssh_hardening(
   $use_pam               = false,
   $allow_tcp_forwarding   = false,
   $allow_agent_forwarding = false,
+  $client_options         = {},
 ) {
   class { 'ssh_hardening::server':
     cbc_required           => $cbc_required,
@@ -94,5 +98,6 @@ class ssh_hardening(
     cbc_required => $cbc_required,
     weak_hmac    => $weak_hmac,
     weak_kex     => $weak_kex,
+    options      => $client_options,
   }
 }
