@@ -45,6 +45,19 @@ You should configure core attributes:
 
 **The default value for `listen_to` is `0.0.0.0`. It is highly recommended to change the value.**
 
+### Overwriting default options
+Default options will be merged with options passed in by the `client_options` and `server_options` parameters.
+If an option is set both as default and via options parameter, the latter will win.
+
+The following example will enable X11Forwarding, which is disabled by default:
+
+```puppet
+class { 'ssh_hardening':
+  server_options => {
+    'X11Forwarding' => 'yes',
+  },
+}
+```
 
 ## FAQ / Pitfalls
 
