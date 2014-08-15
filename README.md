@@ -91,6 +91,7 @@ If you find this isn't enough, feel free to activate `cbc_required` for ciphers,
 * Edmund Haselwanter [ehaselwanter](https://github.com/ehaselwanter)
 * Christoph Hartmann [chris-rock](https://github.com/chris-rock)
 * Patrick Meier [atomic111](https://github.com/atomic111)
+* Matthew Haughton [3flex](https://github.com/3flex)
 * Kurt Huwig [kurthuwig](https://github.com/kurthuwig)
 * Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
 
