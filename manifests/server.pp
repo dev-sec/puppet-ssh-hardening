@@ -48,6 +48,9 @@
 # [*ipv6_enabled*]
 #   Set to true if you need IPv6 support in SSH.
 #
+# [*options*]
+#   Allow override of default settings provided by the module.
+#
 class ssh_hardening::server (
   $cbc_required           = false,
   $weak_hmac              = false,
@@ -62,6 +65,7 @@ class ssh_hardening::server (
   $use_pam                = false,
   $allow_tcp_forwarding   = false,
   $allow_agent_forwarding = false,
+  $options                = {},
 ) {
 
   $addressfamily = $ipv6_enabled ? {
@@ -93,9 +97,7 @@ class ssh_hardening::server (
     false => 'no'
   }
 
-  class { 'ssh::server':
-    storeconfigs_enabled => false,
-    options              => {
+    $default_hardened_options = {
       # Basic configuration
       # ===================
 
@@ -272,7 +274,13 @@ class ssh_hardening::server (
       #PasswordAuthentication no
       #PermitRootLogin no
       #X11Forwarding no
-    },
+    }
+
+  $merged_options = merge($default_hardened_options, $options)
+
+  class { 'ssh::server':
+    storeconfigs_enabled => false,
+    options              => $merged_options,
   }
 
   file {'/etc/ssh':
