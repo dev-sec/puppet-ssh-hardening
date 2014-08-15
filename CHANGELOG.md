@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+* feature: add back puppet 3.4.3 support
+* feature: make other SSH configuration options configurable
+* improvement: added faq on locked accounts to readme
+
 ## 1.0.0
 
 * feature: add support for oracle linux in crypto
