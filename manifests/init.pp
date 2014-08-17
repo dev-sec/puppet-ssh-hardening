@@ -93,8 +93,8 @@ class ssh_hardening(
     allow_root_with_key    => $allow_root_with_key,
     ipv6_enabled           => $ipv6_enabled,
     use_pam                => $use_pam,
-    allow_tcp_forwarding   => false,
-    allow_agent_forwarding => false,
+    allow_tcp_forwarding   => $allow_tcp_forwarding,
+    allow_agent_forwarding => $allow_agent_forwarding,
     options                => $server_options,
   }
   class { 'ssh_hardening::client':
