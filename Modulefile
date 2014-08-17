@@ -1,5 +1,5 @@
 name    'hardening/ssh_hardening'
-version '1.0.1'
+version '1.0.2'
 source 'https://github.com/TelekomLabs/puppet-ssh-hardening'
 author 'Dominik Richter'
 license 'Apache License, Version 2.0'

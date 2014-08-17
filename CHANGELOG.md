@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+* bugfix: pass allow_{tcp,agent}_forwarding from init to classes
+
 ## 1.0.1
 
 * feature: add back puppet 3.4.3 support
