@@ -164,10 +164,6 @@ class ssh_hardening::server (
       #
       'KexAlgorithms'                   => $kex,
 
-      # Lifetime and size of ephemeral version 1 server key
-      'KeyRegenerationInterval'         => '1h',
-      'ServerKeyBits'                   => 2048,
-
       # Authentication
       # --------------
 
@@ -181,13 +177,11 @@ class ssh_hardening::server (
       'MaxStartups'                     => '10:30:100',
 
       # Enable public key authentication
-      'RSAAuthentication'               => 'yes',
       'PubkeyAuthentication'            => 'yes',
 
       # Never use host-based authentication. It can be exploited.
       'IgnoreRhosts'                    => 'yes',
       'IgnoreUserKnownHosts'            => 'yes',
-      'RhostsRSAAuthentication'         => 'no',
       'HostbasedAuthentication'         => 'no',
 
       # Disable password-based authentication, it can allow for
