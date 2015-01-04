@@ -1,5 +1,5 @@
 {
-  "name": "hardening/ssh_hardening",
+  "name": "hardening-ssh_hardening",
   "version": "1.0.2",
   "source": "https://github.com/TelekomLabs/puppet-ssh-hardening",
   "author": "Dominik Richter",
