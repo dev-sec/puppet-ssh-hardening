@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3
+
+* feature: remove legacy SSHv1 code
+* feature: add back GCM cipher
+
 ## 1.0.2
 
 * bugfix: pass allow_{tcp,agent}_forwarding from init to classes
