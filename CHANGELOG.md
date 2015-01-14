@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4
+
+* improvement: reprioritize EtM-based MACs
+* improvement: move SHA1 KEX algos from default to weak profile
+
 ## 1.0.3
 
 * feature: remove legacy SSHv1 code
