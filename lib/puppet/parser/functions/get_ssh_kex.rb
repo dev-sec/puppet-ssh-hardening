@@ -22,12 +22,12 @@ Puppet::Parser::Functions.newfunction(:get_ssh_kex, :type => :rvalue) do |args|
   weak_kex = args[2] ? 'weak' : 'default'
 
   kex_59 = {}
-  kex_59.default = 'diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1'
-  kex_59['weak'] = kex_59['default'] + ',diffie-hellman-group1-sha1'
+  kex_59.default = 'diffie-hellman-group-exchange-sha256'
+  kex_59['weak'] = kex_59['default'] + ',diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1'
 
   kex_66 = {}
-  kex_66.default = 'curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1'
-  kex_66['weak'] = kex_66['default'] + ',diffie-hellman-group1-sha1'
+  kex_66.default = 'curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256'
+  kex_66['weak'] = kex_66['default'] + ',diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1'
 
   # creat the default version map (if os + version are default)
   default_vmap = {}
