@@ -94,6 +94,8 @@ If you find this isn't enough, feel free to activate `cbc_required` for ciphers,
 * Matthew Haughton [3flex](https://github.com/3flex)
 * Kurt Huwig [kurthuwig](https://github.com/kurthuwig)
 * Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
+* Bernhard Weisshuhn [bkw](https://github.com/bkw)
+* [stribika](https://github.com/stribika)
 
 ## License and Author
 
