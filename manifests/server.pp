@@ -169,7 +169,7 @@ class ssh_hardening::server (
 
       # Secure Login directives.
       'UseLogin'                        => 'no',
-      'UsePrivilegeSeparation'          => 'yes',
+      'UsePrivilegeSeparation'          => 'sandbox',
       'PermitUserEnvironment'           => 'no',
       'LoginGraceTime'                  => '30s',
       'MaxAuthTries'                    => 2,
