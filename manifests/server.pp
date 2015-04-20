@@ -56,7 +56,7 @@ class ssh_hardening::server (
   $weak_hmac              = false,
   $weak_kex               = false,
   $ports                  = [ 22 ],
-  $listen_to              = [ '0.0.0.0' ],
+  $listen_to              = [],
   $host_key_files         = [],
   $client_alive_interval  = 600,
   $client_alive_count     = 3,
