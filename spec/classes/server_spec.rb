@@ -42,8 +42,6 @@ describe 'ssh_hardening::server' do
     expect_option('ssh::server', 'Port', ['8022'])
   end
 
-  # default configuration
-  expect_option('ssh::server', 'ListenAddress', ['0.0.0.0'])
   # user configuration
   context 'with listen_to => 1.2.3.4' do
     let(:params) { { :listen_to => '1.2.3.4' } }
