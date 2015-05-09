@@ -27,10 +27,10 @@ end
 
 # Wrap expected value to strings for older releases of Puppet
 # These will convert their number to strings; wrap around arrays
-def wrap_expected val
+def wrap_expected(val)
   return val if Puppet.version.to_f >= 4
-  return val.map{|x| wrap_expected(x) } if val.kind_of?(Array)
-  return val.to_s
+  return val.map { |x| wrap_expected(x) } if val.is_a?(Array)
+  val.to_s
 end
 
 # Helper function to expect a class to have a set of

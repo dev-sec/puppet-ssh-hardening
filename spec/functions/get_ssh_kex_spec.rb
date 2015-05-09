@@ -24,23 +24,27 @@ describe 'get_ssh_kex' do
   end
 
   # should get the correct kex (default)
-  it { should run.with_params('', '', false).
-    and_return('diffie-hellman-group-exchange-sha256')
-  }
+  it do
+    should run.with_params('', '', false)
+      .and_return('diffie-hellman-group-exchange-sha256')
+  end
 
   # should get the correct kex (default weak)
-  it { should run.with_params('', '', true).
-    and_return('diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1')
-  }
+  it do
+    should run.with_params('', '', true)
+      .and_return('diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1')
+  end
 
   # should get the correct kex (ubuntu 12.04, default)
-  it { should run.with_params('ubuntu', '12.04', false).
-    and_return('diffie-hellman-group-exchange-sha256')
-  }
+  it do
+    should run.with_params('ubuntu', '12.04', false)
+      .and_return('diffie-hellman-group-exchange-sha256')
+  end
 
   # should get the correct kex (ubuntu 12.04, weak)
-  it { should run.with_params('ubuntu', '12.04', true).
-    and_return('diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1')
-  }
+  it do
+    should run.with_params('ubuntu', '12.04', true)
+      .and_return('diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1')
+  end
 
 end
