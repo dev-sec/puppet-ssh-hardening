@@ -1,4 +1,4 @@
-# ssh_hardening (Puppet module)
+# Puppet SSH hardening
 
 [![Puppet Forge](https://img.shields.io/puppetforge/dt/hardening/ssh_hardening.svg)][1]
 [![Build Status](http://img.shields.io/travis/hardening-io/puppet-ssh-hardening.svg)][2]
@@ -6,7 +6,7 @@
 
 ## Description
 
-This module provides secure ssh-client and ssh-server configurations.
+This Puppet module provides secure ssh-client and ssh-server configurations.
 
 ## Requirements
 
