@@ -25,26 +25,26 @@ describe 'get_ssh_macs' do
 
   # it should get the correct macs (default)
   it do
-    should run.with_params('', '', false)
-      .and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160')
+    should run.with_params('', '', false).
+      and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160')
   end
 
   # it should get the correct macs (default weak)
   it do
-    should run.with_params('', '', true)
-      .and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1')
+    should run.with_params('', '', true).
+      and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1')
   end
 
   # it should get the correct macs (ubuntu 12.04, default)
   it do
-    should run.with_params('ubuntu', '12.04', false)
-      .and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160')
+    should run.with_params('ubuntu', '12.04', false).
+      and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160')
   end
 
   # it should get the correct macs (ubuntu 12.04, weak)
   it do
-    should run.with_params('ubuntu', '12.04', true)
-      .and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1')
+    should run.with_params('ubuntu', '12.04', true).
+      and_return('hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,hmac-sha1')
   end
 
 end
