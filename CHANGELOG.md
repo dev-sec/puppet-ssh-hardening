@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5
+
+* feature: UsePrivilegeSeparation = sandbox for ssh >= 5.9
+* feature: support Puppet 4
+
 ## 1.0.4
 
 * improvement: reprioritize EtM-based MACs
