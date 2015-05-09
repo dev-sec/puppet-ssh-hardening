@@ -35,11 +35,11 @@ describe 'ssh_hardening::server' do
   it { should contain_class('ssh::server').with_storeconfigs_enabled(false) }
 
   # default configuration
-  expect_option('ssh::server', 'Port', ['22'])
+  expect_option('ssh::server', 'Port', [22])
   # user configuration
   context 'with ports => [8022]' do
     let(:params) { { :ports => [8022] } }
-    expect_option('ssh::server', 'Port', ['8022'])
+    expect_option('ssh::server', 'Port', [8022])
   end
 
   # user configuration
@@ -57,19 +57,19 @@ describe 'ssh_hardening::server' do
   end
 
   # default configuration
-  expect_option('ssh::server', 'ClientAliveInterval', '600')
+  expect_option('ssh::server', 'ClientAliveInterval', 600)
   # user configuration
   context 'with client_alive_interval => 300' do
     let(:params) { { :client_alive_interval => 300 } }
-    expect_option('ssh::server', 'ClientAliveInterval', '300')
+    expect_option('ssh::server', 'ClientAliveInterval', 300)
   end
 
   # default configuration
-  expect_option('ssh::server', 'ClientAliveCountMax', '3')
+  expect_option('ssh::server', 'ClientAliveCountMax', 3)
   # user configuration
   context 'with client_alive_count => 2' do
     let(:params) { { :client_alive_count => 2 } }
-    expect_option('ssh::server', 'ClientAliveCountMax', '2')
+    expect_option('ssh::server', 'ClientAliveCountMax', 2)
   end
 
   # default configuration
