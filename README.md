@@ -1,5 +1,9 @@
 # ssh_hardening (Puppet module)
 
+[![Puppet Forge](https://img.shields.io/puppetforge/dt/hardening/ssh_hardening.svg)][1]
+[![Build Status](http://img.shields.io/travis/hardening-io/puppet-ssh-hardening.svg)][2]
+[![Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)][3]
+
 ## Description
 
 This module provides secure ssh-client and ssh-server configurations.
@@ -113,3 +117,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+[1]: https://forge.puppetlabs.com/hardening/ssh_hardening
+[2]: http://travis-ci.org/hardening-io/puppet-ssh-hardening
+[3]: https://gitter.im/hardening-io
