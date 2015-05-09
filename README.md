@@ -92,12 +92,15 @@ If you find this isn't enough, feel free to activate `cbc_required` for ciphers,
 
 ## Contributors + Kudos
 
+* Dominik Richter [arlimus](https://github.com/arlimus)
 * Edmund Haselwanter [ehaselwanter](https://github.com/ehaselwanter)
 * Christoph Hartmann [chris-rock](https://github.com/chris-rock)
 * Patrick Meier [atomic111](https://github.com/atomic111)
 * Matthew Haughton [3flex](https://github.com/3flex)
+* Bernhard Schmidt [bernhardschmidt](https://github.com/bernhardschmidt)
 * Kurt Huwig [kurthuwig](https://github.com/kurthuwig)
 * Artem Sidorenko [artem-sidorenko](https://github.com/artem-sidorenko)
+* Guillaume Destuynder [gdestuynder](https://github.com/gdestuynder)
 * Bernhard Weisshuhn [bkw](https://github.com/bkw)
 * [stribika](https://github.com/stribika)
 
