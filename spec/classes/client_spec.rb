@@ -26,11 +26,11 @@ describe 'ssh_hardening::client' do
   it { should contain_class('ssh::client').with_storeconfigs_enabled(false) }
 
   # default configuration
-  expect_option('ssh::client', 'Port', ['22'])
+  expect_option('ssh::client', 'Port', [22])
   # user configuration
   context 'with ports => [8022]' do
     let(:params) { { :ports => [8022] } }
-    expect_option('ssh::client', 'Port', ['8022'])
+    expect_option('ssh::client', 'Port', [8022])
   end
 
   # default configuration
