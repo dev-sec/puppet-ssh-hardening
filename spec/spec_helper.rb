@@ -25,6 +25,14 @@ RSpec.configure do |c|
   c.environmentpath = File.expand_path(File.join(Dir.pwd, 'spec'))
 end
 
+# Wrap expected value to strings for older releases of Puppet
+# These will convert their number to strings; wrap around arrays
+def wrap_expected val
+  return val if Puppet.version.to_f >= 4
+  return val.map{|x| wrap_expected(x) } if val.kind_of?(Array)
+  return val.to_s
+end
+
 # Helper function to expect a class to have a set of
 # options defined. These options are not first-class citizens
 # of puppet, but instead a key-value map. So regular rspec matchers
@@ -39,7 +47,8 @@ def expect_option(klass, key, val)
   it do
     should contain_class(klass).with_options(
       lambda do |map|
-        if map[key] == val
+        # check
+        if map[key] == wrap_expected(val)
           true
         else
           fail "#{klass} option #{key.inspect} doesn't match (-- expected, ++ actual):\n"\
