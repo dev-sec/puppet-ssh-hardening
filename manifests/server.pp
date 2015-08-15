@@ -65,6 +65,7 @@ class ssh_hardening::server (
   $use_pam                = false,
   $allow_tcp_forwarding   = false,
   $allow_agent_forwarding = false,
+  $max_auth_retries       = 2,
   $options                = {},
 ) {
 
@@ -173,7 +174,7 @@ class ssh_hardening::server (
       'UsePrivilegeSeparation'          => $priv_sep,
       'PermitUserEnvironment'           => 'no',
       'LoginGraceTime'                  => '30s',
-      'MaxAuthTries'                    => 2,
+      'MaxAuthTries'                    => $max_auth_retries,
       'MaxSessions'                     => 10,
       'MaxStartups'                     => '10:30:100',
 

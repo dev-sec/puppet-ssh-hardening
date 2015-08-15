@@ -78,6 +78,7 @@ class ssh_hardening(
   $use_pam               = false,
   $allow_tcp_forwarding   = false,
   $allow_agent_forwarding = false,
+  $max_auth_retries       = 2,
   $server_options         = {},
   $client_options         = {},
 ) {
@@ -95,6 +96,7 @@ class ssh_hardening(
     use_pam                => $use_pam,
     allow_tcp_forwarding   => $allow_tcp_forwarding,
     allow_agent_forwarding => $allow_agent_forwarding,
+    max_auth_retries       => $max_auth_retries,
     options                => $server_options,
   }
   class { 'ssh_hardening::client':
