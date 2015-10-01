@@ -66,11 +66,7 @@ class ssh_hardening(
   $weak_kex              = false,
   $ports                 = [ 22 ],
   $listen_to             = [],
-  $host_key_files        = [
-    '/etc/ssh/ssh_host_rsa_key',
-    '/etc/ssh/ssh_host_dsa_key',
-    '/etc/ssh/ssh_host_ecdsa_key'
-    ],
+  $host_key_files        = [],
   $client_alive_interval = 600,
   $client_alive_count    = 3,
   $allow_root_with_key   = false,
