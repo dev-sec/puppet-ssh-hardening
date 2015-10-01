@@ -16,21 +16,12 @@
 #
 
 Puppet::Parser::Functions.newfunction(:use_privilege_separation, :type => :rvalue) do |args|
-  os = args[0].downcase
-  osrelease = args[1]
-  osmajor = osrelease.sub(/\..*/, '')
+  ssh_vers = args[0]
 
-  ps53 = 'yes'
-  ps59 = 'sandbox'
-  ps = ps59
+  ps = 'yes'
 
-  # redhat/centos/oracle 6.x has ssh 5.3
-  if os == 'redhat' || os == 'centos' || os == 'oraclelinux'
-    ps = ps53
-
-  # debian 7.x and newer has ssh 5.9+
-  elsif os == 'debian' && osmajor.to_i <= 6
-    ps = ps53
+  if Puppet::Util::Package.versioncmp(ssh_vers, '6.6') >= 0
+    ps = 'sandbox'
   end
 
   ps
