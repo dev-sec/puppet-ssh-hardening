@@ -11,7 +11,7 @@ This Puppet module provides secure ssh-client and ssh-server configurations.
 ## Requirements
 
 * Puppet
-* Puppet modules: `saz/ssh` (>= 2.3.6), `puppetlabs/stdlib` (>= 4.2.0)
+* Puppet modules: `saz/ssh` (>= 2.5.0), `puppetlabs/stdlib` (>= 4.2.0)
 
 
 ## Parameters

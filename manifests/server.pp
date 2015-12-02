@@ -69,15 +69,27 @@ class ssh_hardening::server (
   $options                = {},
 ) {
 
+  $ssh65 = versioncmp($ssh_server_version_major, '6.5') >= 0
+  $default_keys = $ssh65 ? {
+    true  => [ '/etc/ssh/ssh_host_rsa_key', '/etc/ssh/ssh_host_ed25519_key' ],
+    false => [ '/etc/ssh/ssh_host_rsa_key' ],
+  }
+
+  $empty = size($host_key_files) == 0
+  $host_keys = $empty ? {
+    true  => $default_keys,
+    false => $host_key_files,
+  }
+
   $addressfamily = $ipv6_enabled ? {
     true  => 'any',
     false => 'inet',
   }
 
-  $ciphers = get_ssh_ciphers($::operatingsystem, $::operatingsystemrelease, $cbc_required)
-  $macs = get_ssh_macs($::operatingsystem, $::operatingsystemrelease, $weak_hmac)
-  $kex = get_ssh_kex($::operatingsystem, $::operatingsystemrelease, $weak_kex)
-  $priv_sep = use_privilege_separation($::operatingsystem, $::operatingsystemrelease)
+  $ciphers = get_ssh_ciphers($ssh_server_version_major, $cbc_required)
+  $macs = get_ssh_macs($ssh_server_version_major, $weak_hmac)
+  $kex = get_ssh_kex($ssh_server_version_major, $weak_kex)
+  $priv_sep = use_privilege_separation($ssh_server_version_major)
 
   $permit_root_login = $allow_root_with_key ? {
     true  => 'without-password',
@@ -119,7 +131,7 @@ class ssh_hardening::server (
       'ListenAddress'                   => $listen_to,
 
       # Define the HostKey
-      'HostKey'                         => $host_key_files,
+      'HostKey'                         => $host_keys,
 
       # Security configuration
       # ======================
