@@ -135,6 +135,9 @@ class ssh_hardening::client (
     # Enable compression. More pressure on the CPU, less on the network.
     'Compression'               => 'yes',
 
+    # Disable Roaming
+    'UseRoaming'                => 'no',
+
     #EscapeChar ~
     #VisualHostKey yes
   }
