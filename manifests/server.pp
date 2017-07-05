@@ -59,6 +59,7 @@ class ssh_hardening::server (
   $listen_to              = [],
   $host_key_files         = [],
   $client_alive_interval  = 600,
+  $challenge_response     = false,
   $client_alive_count     = 3,
   $allow_root_with_key    = false,
   $ipv6_enabled           = false,
@@ -90,6 +91,11 @@ class ssh_hardening::server (
   }
 
   $tcp_forwarding = $allow_tcp_forwarding ? {
+    true  => 'yes',
+    false => 'no'
+  }
+
+  $challenge_response_on = $challenge_response ? {
     true  => 'yes',
     false => 'no'
   }
@@ -191,7 +197,7 @@ class ssh_hardening::server (
       'UsePAM'                          => $use_pam_option,
       'PasswordAuthentication'          => 'no',
       'PermitEmptyPasswords'            => 'no',
-      'ChallengeResponseAuthentication' => 'no',
+      'ChallengeResponseAuthentication' => $challenge_response_on,
 
       # Only enable Kerberos authentication if it is configured.
       'KerberosAuthentication'          => 'no',
