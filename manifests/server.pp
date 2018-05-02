@@ -170,7 +170,7 @@ class ssh_hardening::server (
       # --------------
 
       # Secure Login directives.
-      'UseLogin'                        => 'no',
+      # 'UseLogin'                        => 'no',  # Option deprecated in OpenSSH 7.4 2016-12-19
       'UsePrivilegeSeparation'          => $priv_sep,
       'PermitUserEnvironment'           => 'no',
       'LoginGraceTime'                  => '30s',
