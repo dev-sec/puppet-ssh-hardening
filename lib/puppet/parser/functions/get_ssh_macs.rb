@@ -29,11 +29,11 @@ Puppet::Parser::Functions.newfunction(:get_ssh_macs, :type => :rvalue) do |args|
   macs_59['weak'] = macs_59['default'] + ',hmac-sha1'
 
   macs_66 = {}
-  macs_66.default = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160'
+  macs_66.default = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256'
   macs_66['weak'] = macs_66['default'] + ',hmac-sha1'
 
   macs_74 = {}
-  macs_74.default = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com,curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256'
+  macs_74.default = 'hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com'
   macs_74['weak'] = macs_74['default'] + ',hmac-sha1'
 
   # create the default version map (if os + version are default)
