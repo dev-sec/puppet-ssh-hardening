@@ -46,6 +46,7 @@ Puppet::Parser::Functions.newfunction(:get_ssh_ciphers, :type => :rvalue) do |ar
   m['debian']['6'] = ciphers_53
   m['debian']['7'] = ciphers_53
   m['debian']['8'] = ciphers_66
+  m['debian']['9'] = ciphers_66
   m['debian'].default = ciphers_53
 
   m['redhat'] = {}
