@@ -117,7 +117,7 @@ Alternatively, if you intend to use PAM, you enabled it via `use_pam = true`. PA
 
 **Why doesn't my application connect via SSH anymore?**
 
-Always look into log files first and if possible look at the negotation between client and server that is completed when connecting.
+Always look into log files first and if possible look at the negotiation between client and server that is completed when connecting.
 
 We have seen some issues in applications (based on python and ruby) that are due to their use of an outdated crypto set. This collides with this hardening module, which reduced the list of ciphers, message authentication codes (MACs) and key exchange (KEX) algorithms to a more secure selection.
 
