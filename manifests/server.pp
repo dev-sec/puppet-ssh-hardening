@@ -205,7 +205,7 @@ class ssh_hardening::server (
 
       # In case you don't use PAM (`UsePAM no`), you can alternatively
       # restrict users and groups here. For key-based authentication
-      # this is not necessary, since all keys must be explicitely enabled.
+      # this is not necessary, since all keys must be explicitly enabled.
       #DenyUsers *
       #AllowUsers user1
       #DenyGroups *
@@ -256,7 +256,7 @@ class ssh_hardening::server (
       #ChrootDirectory none
       #ChrootDirectory /home/%u
 
-      # Configuratoin, in case SFTP is used
+      # Configuration, in case SFTP is used
       ## override default of no subsystems
       ## Subsystem sftp /opt/app/openssh5/libexec/sftp-server
       #Subsystem sftp internal-sftp -l VERBOSE
